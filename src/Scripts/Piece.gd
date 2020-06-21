@@ -47,6 +47,7 @@ func _on_Area_area_exited(area: Area2D) -> void:
 
 
 func _on_Area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+
 	if controller.is_piece_on_top(controller.pieces_under_cursor, self) == true:
 		is_on_top = true
 
@@ -61,5 +62,5 @@ func _on_Area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> 
 			if event.is_action_released("action"):
 				is_selected = false
 
-		if event is InputEventMouseMotion && is_selected == true:
-			self.position = get_global_mouse_position() - mouse_drag_offset
+	if event is InputEventMouseMotion && is_selected == true:
+		self.position = get_global_mouse_position() - mouse_drag_offset

@@ -6,7 +6,7 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/region_origin = Vector2( 30, 60 )
-shader_param/region_size = Vector2( 50, 50 )
-shader_param/texture_size = null
+shader_param/target_size = Vector2( 5, 5 )
+shader_param/region_size = Vector2( 500, 500 )
+shader_param/region_origin = Vector2( 800, 300 )
 shader_param/mask = ExtResource( 1 )

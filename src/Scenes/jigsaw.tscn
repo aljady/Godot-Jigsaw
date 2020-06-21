@@ -33,3 +33,18 @@ zoom = Vector2( 2, 2 )
 visible = false
 material = SubResource( 1 )
 texture = SubResource( 2 )
+
+[node name="HSlider" type="HSlider" parent="."]
+visible = false
+margin_left = 4.0
+margin_top = -74.0
+margin_right = 510.0
+margin_bottom = -41.0
+rect_scale = Vector2( 2, 2 )
+min_value = 2.0
+max_value = 50.0
+value = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]

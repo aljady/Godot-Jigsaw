@@ -99,7 +99,7 @@ func generate_pieces(rows, columns) -> void:
 			new_piece.sprite.set_material(mat)
 			mat.set_shader_param("region_origin", Vector2(piece_x * col, piece_y * row))
 			mat.set_shader_param("region_size", Vector2(piece_x, piece_y))
-			mat.set_shader_param("texture_size", Vector2(img_texture.get_width(), img_texture.get_height()))
+			mat.set_shader_param("target_size", Vector2(20.0, 20.0))
 			mat.set_shader_param("mask", msk_texture)
 
 			# Collision shape
@@ -118,3 +118,9 @@ func generate_pieces(rows, columns) -> void:
 			new_piece.edge_right 	= piece_idx(rows, row, col+1) if col < columns-1 else null
 			new_piece.edge_bottom 	= piece_idx(rows, row+1, col) if row < rows-1 else null
 			new_piece.edge_left 	= piece_idx(rows, row, col-1) if col > 0 else null
+
+
+func _on_HSlider_value_changed(value: float) -> void:
+	var pieces_folder :Node2D = $Pieces
+	for p in pieces_folder.get_children():
+			p.sprite.material.set_shader_param("target_size", Vector2(value, value))

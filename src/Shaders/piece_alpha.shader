@@ -17,6 +17,7 @@ void fragment() {
 	ctex.a = cmask_comp / 3.0;
 	
 	// Bevel
-	
+	if (ctex.a < 1.0) { ctex = vec4(0.0, 0.0, 0.0, ctex.a) }
+
     COLOR = ctex;
 }

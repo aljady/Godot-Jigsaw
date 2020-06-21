@@ -47,16 +47,11 @@ func _on_Area_area_exited(area: Area2D) -> void:
 
 
 func _on_Area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-
 	if controller.is_piece_on_top(controller.pieces_under_cursor, self) == true:
 		is_on_top = true
 
 		if event is InputEventMouseButton:
 			if event.is_action_pressed("action"):
-				###################################################
-				print(self.sprite.material)
-				print(self.sprite.material.get_shader_param("mask"))
-				###################################################
 				mouse_drag_offset = self.get_local_mouse_position()
 				is_selected = true
 				for ar in sensor.get_overlapping_areas():

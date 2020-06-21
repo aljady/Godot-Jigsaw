@@ -30,6 +30,7 @@ func is_piece_on_top(pieces_dictionary, piece) -> bool:
 	else:
 		return false
 
+
 func _ready() -> void:
 	# Load Image
 	img_texture = ImageTexture.new()
@@ -41,7 +42,6 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-
 	if event is InputEventMouseButton:
 		if event.is_action("zoom_in"):
 			if Cam.zoom > Vector2(0.4, 0.4):
@@ -70,7 +70,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func setup_board() -> void:
 	Pic.position = Vector2(0,0)
-	Cam.position = Vector2(0,0)
+	#Cam.position = Vector2(0,0)
 
 
 static func piece_idx(rows, row, col) -> int:
@@ -78,7 +78,6 @@ static func piece_idx(rows, row, col) -> int:
 
 
 func generate_pieces(rows, columns) -> void:
-
 	var piece_x = Pic.texture.get_width() / float(columns)
 	var piece_y = Pic.texture.get_height() / float(rows)
 

@@ -24,8 +24,10 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -62.9382, -80.5609 )
 anchor_mode = 0
 current = true
+zoom = Vector2( 2, 2 )
 
 [node name="testSprite" type="Sprite" parent="."]
 visible = false

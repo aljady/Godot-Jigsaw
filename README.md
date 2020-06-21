@@ -13,8 +13,8 @@ A basic jigsaw puzzle game made with Godot (WIP)
 * Final image transparency slider
 * Menus n stuff
 
-#Image Credits
-##Unsplash
+# Image Credits
+## Unsplash
 Used under [Unplash Licence](https://unsplash.com/license)
 
 * <forest01.jpg>

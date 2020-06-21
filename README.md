@@ -13,12 +13,11 @@ A basic jigsaw puzzle game made with Godot (WIP)
 * Final image transparency slider
 * Menus n stuff
 
-#Image Credits
-##Unsplash
+# Image Credits
+## Unsplash
+
 Used under [Unplash Licence](https://unsplash.com/license)
 
-* <forest01.jpg>
-Joshua Woroniecki / [Photo](https://unsplash.com/photos/nWC8Rqx62zY) / [Profile](https://unsplash.com/@joshua_j_woroniecki) / [Website](https://joshuaworoniecki.com)
+* <forest01.jpg> by Joshua Woroniecki / [Photo](https://unsplash.com/photos/nWC8Rqx62zY) / [Profile](https://unsplash.com/@joshua_j_woroniecki) / [Website](https://joshuaworoniecki.com)
 
-* <mountain01.jpg
-Viktoria Spokojna / [Photo](https://unsplash.com/photos/xOIWQlUC2NI) / [Profile](https://unsplash.com/@viktoriaspokojna)
+* <mountain01.jpg by Viktoria Spokojna / [Photo](https://unsplash.com/photos/xOIWQlUC2NI) / [Profile](https://unsplash.com/@viktoriaspokojna)

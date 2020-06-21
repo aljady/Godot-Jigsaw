@@ -22,6 +22,5 @@ region_rect = Rect2( 278, 100, 34, 23 )
 shape = SubResource( 1 )
 [connection signal="area_entered" from="Sensor" to="." method="_on_Area_area_entered"]
 [connection signal="area_exited" from="Sensor" to="." method="_on_Area_area_exited"]
-[connection signal="input_event" from="Sensor" to="." method="_on_Area_input_event"]
 [connection signal="mouse_entered" from="Sensor" to="." method="_on_Area_mouse_entered"]
 [connection signal="mouse_exited" from="Sensor" to="." method="_on_Area_mouse_exited"]

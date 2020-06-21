@@ -13,25 +13,14 @@ onready var Cam 	:Camera2D 	= $Camera2D
 onready var Pieces	:Node2D 	= $Pieces
 
 var pieces_under_cursor = {}
-var action_pressed :bool
+var action_pressed :bool = false
+var piece_pressed :bool = false
+var active_piece
 
 var img_texture 	:ImageTexture
 var msk_texture		:ImageTexture
 var tex 			:AtlasTexture
 var mat				:ShaderMaterial
-
-
-func is_piece_on_top(piece) -> bool:
-	var top_z = -99
-	var top_p
-	for p in pieces_under_cursor.values():
-		if p.z_index > top_z:
-			top_z = p.z_index
-			top_p = p
-	if top_p == piece:
-		return true
-	else:
-		return false
 
 
 func _ready() -> void:
@@ -45,30 +34,67 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+
+	# Button
 	if event is InputEventMouseButton:
+		## Zoom in
 		if event.is_action("zoom_in"):
-			if Cam.zoom > Vector2(0.4, 0.4):
-				Cam.zoom -= Vector2(0.1,0.1)
-
+			if Cam.zoom > Vector2(0.4, 0.4): Cam.zoom -= Vector2(0.1,0.1)
+		## Zoom out
 		if event.is_action("zoom_out"):
-			if Cam.zoom < Vector2(3, 3):
-				Cam.zoom += Vector2(0.1,0.1)
+			if Cam.zoom < Vector2(3, 3): Cam.zoom += Vector2(0.1,0.1)
+		## Press
+		if event.is_action_pressed("action"):
+			action_pressed = true
+			if pieces_under_cursor.empty():
+				piece_pressed = false
+			else:
+				piece_pressed = true
+				active_piece = _get_top_piece()
+				_put_on_top(active_piece)
+		## Long press
+		#//TODO
+		## Release
+		if event.is_action_released("action"):
+			action_pressed = false
+			piece_pressed = false
+			if not active_piece == null: active_piece.is_dragged = false
 
-	if event.is_action_pressed("action"):
-		action_pressed = true
-	elif event.is_action_released("action"):
-		action_pressed = false
+	# Motion
+	if event is InputEventMouseMotion:
+		if action_pressed == true:
+			if piece_pressed == true:
+				## Move Piece
+				active_piece.is_dragged = true
+				active_piece.position = get_global_mouse_position()
+			else:
+				## Pan Camera
+				get_tree().set_input_as_handled()
+				Cam.position -= event.relative * Cam.zoom
 
-#	if event is InputEventMouseMotion:
-#		if action_pressed == true:
-#			if cursor_on_piece == true:
-#				# Move piece
-#				active_piece.position = get_global_mouse_position()
-#
-#			else:
-#				# Move view
-#				get_tree().set_input_as_handled()
-#				Cam.position -= event.relative * Cam.zoom
+
+func _on_piece_mouse_entered(p) -> void:
+	pieces_under_cursor[p.id] = p
+
+
+func _on_piece_mouse_exited(p) -> void:
+	pieces_under_cursor.erase(p.id)
+
+
+func _get_top_piece() -> PackedScene:
+	var top_z = -99
+	var top_p
+	for p in pieces_under_cursor.values():
+		if p.z_index > top_z:
+			top_z = p.z_index
+			top_p = p
+	return top_p
+
+
+func _put_on_top(p) -> void:
+	for ar in p.sensor.get_overlapping_areas():
+		var ov_p = ar.get_parent()
+		if p.z_index <= ov_p.z_index: p.z_index = ov_p.z_index + 1
 
 
 func setup_board() -> void:

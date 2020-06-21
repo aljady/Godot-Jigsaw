@@ -1,7 +1,10 @@
 extends Node2D
 
+export var pieces_amount :Vector2
+export var pieces_resolution :Vector2
+
 const myPiece = preload("res://src/scenes/piece.tscn")
-const myImage = "res://src/textures/9ez95oi5k7g31.png"
+const myImage = "res://src/Textures/forest01.jpg"
 const myShader = preload("res://src/shaders/piece_alpha.shader")
 const myMask = "res://src/textures/testmask.png"
 
@@ -18,10 +21,10 @@ var tex 			:AtlasTexture
 var mat				:ShaderMaterial
 
 
-func is_piece_on_top(pieces_dictionary, piece) -> bool:
+func is_piece_on_top(piece) -> bool:
 	var top_z = -99
 	var top_p
-	for p in pieces_dictionary.values():
+	for p in pieces_under_cursor.values():
 		if p.z_index > top_z:
 			top_z = p.z_index
 			top_p = p
@@ -38,7 +41,7 @@ func _ready() -> void:
 	msk_texture = ImageTexture.new()
 	msk_texture.load(myMask)
 	setup_board()
-	generate_pieces(4, 8)
+	generate_pieces(pieces_amount)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -77,7 +80,11 @@ static func piece_idx(rows, row, col) -> int:
 	return (rows * col) + row
 
 
-func generate_pieces(rows, columns) -> void:
+func generate_pieces(dimensions :Vector2) -> void:
+
+	var rows = dimensions.x
+	var columns = dimensions.y
+
 	var piece_x = Pic.texture.get_width() / float(columns)
 	var piece_y = Pic.texture.get_height() / float(rows)
 
@@ -99,7 +106,7 @@ func generate_pieces(rows, columns) -> void:
 			new_piece.sprite.set_material(mat)
 			mat.set_shader_param("region_origin", Vector2(piece_x * col, piece_y * row))
 			mat.set_shader_param("region_size", Vector2(piece_x, piece_y))
-			mat.set_shader_param("target_size", Vector2(20.0, 20.0))
+			mat.set_shader_param("target_size", Vector2(float(pieces_resolution.x), float(pieces_resolution.y)))
 			mat.set_shader_param("mask", msk_texture)
 
 			# Collision shape

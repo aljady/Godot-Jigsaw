@@ -16,7 +16,6 @@ var edge_bottom
 var edge_left
 var final_position
 
-var overlapping_pieces = []
 var is_selected :bool
 var is_on_top: bool
 
@@ -47,20 +46,19 @@ func _on_Area_area_exited(area: Area2D) -> void:
 
 
 func _on_Area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.is_action_pressed("action"):
 
-	if controller.is_piece_on_top(controller.pieces_under_cursor, self) == true:
-		is_on_top = true
-
-		if event is InputEventMouseButton:
-			if event.is_action_pressed("action"):
-				mouse_drag_offset = self.get_local_mouse_position()
+			if controller.is_piece_on_top(self) == true:
+				is_on_top = true
 				is_selected = true
-				for ar in sensor.get_overlapping_areas():
-					var overlap_piece = ar.get_parent()
-					if self.z_index <= overlap_piece.z_index: self.z_index = overlap_piece.z_index+1
+				mouse_drag_offset = self.get_local_mouse_position()
+			for ar in sensor.get_overlapping_areas():
+				var overlap_piece = ar.get_parent()
+				if self.z_index <= overlap_piece.z_index: self.z_index = overlap_piece.z_index+1
 
-			if event.is_action_released("action"):
-				is_selected = false
+		if event.is_action_released("action"):
+			is_selected = false
 
 	if event is InputEventMouseMotion && is_selected == true:
 		self.position = get_global_mouse_position() - mouse_drag_offset

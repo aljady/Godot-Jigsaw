@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://src/Textures/testmask.png" type="Texture" id=1]
+[ext_resource path="res://src/Shaders/piece_alpha.shader" type="Shader" id=2]
+
+
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/region_origin = Vector2( 30, 60 )
+shader_param/region_size = Vector2( 50, 50 )
+shader_param/texture_size = null
+shader_param/mask = ExtResource( 1 )

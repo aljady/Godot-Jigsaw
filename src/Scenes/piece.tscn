@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Textures/piece.png" type="Texture" id=1]
+[ext_resource path="res://src/Scripts/Piece.gd" type="Script" id=2]
+[ext_resource path="res://src/Shaders/piece_sh_m.tres" type="Material" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23.0038, 18.5549 )
+
+[node name="Piece" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+material = ExtResource( 3 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 278, 100, 34, 23 )
+
+[node name="Sensor" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Sensor"]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Sensor" to="." method="_on_Area_area_entered"]
+[connection signal="area_exited" from="Sensor" to="." method="_on_Area_area_exited"]
+[connection signal="input_event" from="Sensor" to="." method="_on_Area_input_event"]
+[connection signal="mouse_entered" from="Sensor" to="." method="_on_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Sensor" to="." method="_on_Area_mouse_exited"]

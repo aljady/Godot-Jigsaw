@@ -11,3 +11,4 @@ A basic jigsaw puzzle game made with Godot (WIP)
 * Show only edge pieces toggle
 * Drawers
 * Final image transparency slider
+* Menus n stuff
